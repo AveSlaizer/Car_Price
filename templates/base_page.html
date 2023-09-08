@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>Car price</title>
+</head>
+<body>
+{% include 'header.html' %}
+<div> {% block content %}{% endblock content %}</div>
+<footer> {% block footer %}{% endblock footer %}</footer>
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>
