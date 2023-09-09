@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MainpageConfig(AppConfig):
+class GarageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.mainpage'
+    name = 'garage'
