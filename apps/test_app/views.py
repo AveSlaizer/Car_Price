@@ -7,15 +7,15 @@ def show_main(request):
 
 
 def show_garage(request):
-    return render(request, 'garage.html')
+    return render(request, 'garage/garage.html')
 
 
 def show_account(request):
     return render(request, 'personal_account.html')
 
-# TODO написать приложение main
-# TODO написать приложение garage
-# TODO написать приложение account (личный кабинет)
+# TODO написать приложение main. (развернул)
+# TODO написать приложение garage. (развернул)
+# TODO написать приложение account (личный кабинет).
 # TODO реализовать/настроить встроенную в джанго авторизацию
 # TODO создать необходимые таблицы в БД
 # TODO наполнить таблицы тестовыми данными
