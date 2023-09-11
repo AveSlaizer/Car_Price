@@ -5,21 +5,21 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class FuelType(models.Model):
-    fuel_type = models.CharField(primary_key=True, max_length=20, verbose_name="Топливо")
+    fuel_type = models.CharField(primary_key=True, max_length=20, verbose_name="Тип топлива")
 
     def __str__(self):
         return self.fuel_type
 
 
 class TransmissionType(models.Model):
-    gearbox_type = models.CharField(primary_key=True, max_length=20, verbose_name="КПП")
+    gearbox_type = models.CharField(primary_key=True, max_length=20, verbose_name="Тип КПП")
 
     def __str__(self):
         return self.gearbox_type
 
 
 class DriveType(models.Model):
-    drive_type = models.CharField(primary_key=True, max_length=20, verbose_name="Привод")
+    drive_type = models.CharField(primary_key=True, max_length=20, verbose_name="Тип привода")
 
     def __str__(self):
         return self.drive_type

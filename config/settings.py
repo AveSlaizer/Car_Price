@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.mainpage',
     'apps.garage',
+    'apps.finance_expenses',
 ]
 
 MIDDLEWARE = [
