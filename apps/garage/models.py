@@ -23,8 +23,6 @@ class Transport(models.Model):
                                validators=[MinValueValidator(1900), MaxValueValidator(datetime.now().year)])
     engine_volume = models.FloatField(default=1.6, validators=[MinValueValidator(0.0001), MaxValueValidator(100.0)])
     odometer = models.IntegerField(default=12345, null=False, validators=[MinValueValidator(1)])
-    fuel_type = models.ForeignKey(FuelType, on_delete=models.SET_NULL)
-    transmission_type = models.ForeignKey(TransmissionType, on_delete=models.SET_NULL)
-    drive_type = models.ForeignKey(DriveType, on_delete=models.SET_NULL)
-    # TODO дописать модель Transport
-    # TODO makemigrations, migrate
+    fuel_type = models.ForeignKey(FuelType, null=True, on_delete=models.SET_NULL)
+    transmission_type = models.ForeignKey(TransmissionType, null=True, on_delete=models.SET_NULL)
+    drive_type = models.ForeignKey(DriveType, null=True, on_delete=models.SET_NULL)

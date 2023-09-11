@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import FuelType, TransmissionType, DriveType, Transport
 
-# Register your models here.
+admin.site.register(FuelType)
+admin.site.register(TransmissionType)
+admin.site.register(DriveType)
+admin.site.register(Transport)
