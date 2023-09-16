@@ -15,13 +15,15 @@
                         <a class="nav-link fs-4" href="{% url 'garage' %}"> Гараж </a>
                     </li>
                     <li class="nav-item nav">
-                        <a class="nav-link fs-4" href="{% url 'account' %}"> Личный кабинет </a>
+                        <a class="nav-link fs-4" href=""> Личный кабинет </a>
                     </li>
                 </ul>
             </div>
             <div>
                 <button class="btn btn-outline-primary fs-4" type="button">Вход</button>
-                <button class="btn btn-outline-primary fs-4" type="button">Регистрация</button>
+                <a href="{% url 'registration' %}">
+                    <button class="btn btn-outline-primary fs-4" type="button">Регистрация</button>
+                </a>
             </div>
         </div>
     </nav>

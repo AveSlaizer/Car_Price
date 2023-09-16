@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from apps.mainpage.views import MainPage
 from apps.garage import urls as garage_urls
-from apps.test_app.views import show_account
+from apps.accounts import urls as accounts_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPage.show_main_page, name='main'),
     path('garage/', include(garage_urls)),
-    path('account/', show_account, name='account'),
+    path('accounts/', include(accounts_urls)),
     re_path(r'\w+', MainPage.show_main_page, name='main'),
 ]
