@@ -17,13 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 from apps.mainpage.views import MainPage
-from apps.garage import urls as garage_urls
-from apps.accounts import urls as accounts_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPage.show_main_page, name='main'),
-    path('garage/', include(garage_urls)),
-    path('accounts/', include(accounts_urls)),
+    path('garage/', include('apps.garage.urls')),
+    path('accounts/', include('apps.accounts.urls')),
     re_path(r'\w+', MainPage.show_main_page, name='main'),
 ]

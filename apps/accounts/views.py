@@ -1,23 +1,22 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 
-class Accounts:
-    @staticmethod
-    def registration(request):
-        if request.method == 'POST':
-            form = UserCreationForm(request.POST)
-            if form.is_valid():
-                user = form.save(commit=False)
-                user.save()
-                user_group = Group.objects.get(name='common user')
-                user.groups.add(user_group)
-                return redirect('registration_done')
-        else:
-            form = UserCreationForm()
-        return render(request, 'accounts/registration.html', {'form': form})
+class RegisterUser(CreateView):
+    form_class = UserCreationForm
+    template_name = 'accounts/registration.html'
 
-    @staticmethod
-    def registration_done(request):
-        return render(request, 'accounts/registration_done.html')
+    def get_success_url(self):
+        return reverse_lazy('login')
+
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'accounts/login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('main')

@@ -19,12 +19,28 @@
                     </li>
                 </ul>
             </div>
-            <div>
-                <button class="btn btn-outline-primary fs-4" type="button">Вход</button>
-                <a href="{% url 'registration' %}">
-                    <button class="btn btn-outline-primary fs-4" type="button">Регистрация</button>
-                </a>
-            </div>
+            {% if request.user.is_authenticated %}
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <p class="fs-4 text-primary pt-3 mb-0" type="button">Привет, {{ user.username }}</p>
+
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'registration' %}">
+                            <button class="btn btn-outline-primary fs-4 mb-0 mt-1" type="button">Регистрация</button>
+                        </a>
+                    </li>
+                </ul>
+            {% else %}
+                <div>
+                    <a href="{% url 'login' %}">
+                        <button class="btn btn-outline-primary fs-4" type="button">Вход</button>
+                    </a>
+                    <a href="{% url 'registration' %}">
+                        <button class="btn btn-outline-primary fs-4" type="button">Регистрация</button>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </nav>
 </header>

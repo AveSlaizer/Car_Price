@@ -1,15 +1,20 @@
 {% extends 'base_page.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<form>
-    <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Адрес электронной почты</label>
+    <div class="container mt-5 w-25 p-3 border rounded-3 border-2 border-primary-subtle">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            {#        <div class="form-floating mb-3">#}
+            {#            <input type="text" class="form-control" id="loginInput" placeholder="Логин">#}
+            {#            <label for="loginInput">Логин</label>#}
+            {#        </div>#}
+            {#        <div class="form-floating">#}
+            {#            <input type="password" class="form-control" id="passwordInput" placeholder="********">#}
+            {#            <label for="passwordInput">Пароль</label>#}
+            {#        </div>#}
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
     </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Пароль">
-        <label for="floatingPassword">Пароль</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Отправить</button>
-</form>
 {% endblock content %}

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.mainpage',
-    'apps.garage',
+    'apps.garage.apps.GarageConfig',
     'apps.finance_expenses',
     'apps.accounts',
 ]
