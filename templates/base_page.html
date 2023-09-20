@@ -8,17 +8,20 @@
 </head>
 <body>
 {% include 'header.html' %}
-<div> {% block content %}{% endblock content %}</div>
 {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                {{ message }}
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container w-50">
+        <div class="position-relative top-0 start-50 translate-middle-x w-50">
+            {% for message in messages %}
+                <div{% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                                          role="{{ message.tags }}"{% endif %}>{{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endif %}
+<div> {% block content %}{% endblock content %}</div>
+
 <footer> {% block footer %}{% endblock footer %}</footer>
 <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
 </body>

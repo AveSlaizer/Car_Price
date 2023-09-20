@@ -14,20 +14,19 @@ DEFAULT_GROUP_NAME = 'common user'
 class RegisterUser(SuccessMessageMixin, CreateView):
     form_class = UserCreationForm
     template_name = 'accounts/registration.html'
-    success_message = "all_ok"
+    success_message = "Вы успешно зарегистрировались! Авторизуйтесь, чтобы продолжить."
+    success_url = 'login'
 
     def form_valid(self, form):
         user = form.save(commit=False)
         user.save()
         user_group = Group.objects.get(name=DEFAULT_GROUP_NAME)
         user.groups.add(user_group)
-        mess = self.get_success_message(form.cleaned_data)
-        print(mess)
-        # messages.success(request, 'Form submission successful')
-        return redirect(self.get_success_url())
+        response = super().form_valid(form)
+        return response
 
-    def get_success_url(self):
-        return 'login'
+    # def get_success_url(self):
+    #     return 'login'
 
 
 class LoginUser(LoginView):
