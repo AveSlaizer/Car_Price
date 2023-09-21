@@ -8,39 +8,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item nav">
+                    <li class="nav-item nav col-4">
                         <a class="nav-link fs-4" href="{% url 'main' %}"> Главная </a>
                     </li>
-                    <li class="nav-item nav">
+                    <li class="nav-item nav col-4">
                         <a class="nav-link fs-4" href="{% url 'garage' %}"> Гараж </a>
                     </li>
-                    <li class="nav-item nav">
-                        <a class="nav-link fs-4" href=""> Личный кабинет </a>
-                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href=""> Личный кабинет </a>
+                        </li>
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href=""> Выход </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href="{% url 'login' %}"> Вход </a>
+                        </li>
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href="{% url 'registration' %}"> Регистрация </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
-            {% if request.user.is_authenticated %}
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <p class="fs-4 text-primary pt-3 mb-0" type="button">Привет, {{ user.username }}</p>
-
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'registration' %}">
-                            <button class="btn btn-outline-primary fs-4 mb-0 mt-1" type="button">Регистрация</button>
-                        </a>
-                    </li>
-                </ul>
-            {% else %}
-                <div>
-                    <a href="{% url 'login' %}">
-                        <button class="btn btn-outline-primary fs-4" type="button">Вход</button>
-                    </a>
-                    <a href="{% url 'registration' %}">
-                        <button class="btn btn-outline-primary fs-4" type="button">Регистрация</button>
-                    </a>
-                </div>
-            {% endif %}
         </div>
     </nav>
 </header>
