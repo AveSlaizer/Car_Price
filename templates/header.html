@@ -15,11 +15,11 @@
                         <a class="nav-link fs-4" href="{% url 'garage' %}"> Гараж </a>
                     </li>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item nav col-4">
+                        <li class="nav-item nav col-6">
                             <a class="nav-link fs-4" href=""> Личный кабинет </a>
                         </li>
                         <li class="nav-item nav col-4">
-                            <a class="nav-link fs-4" href=""> Выход </a>
+                            <a class="nav-link fs-4" href="{% url 'logout' %}"> Выход </a>
                         </li>
                     {% else %}
                         <li class="nav-item nav col-4">

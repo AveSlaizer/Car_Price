@@ -1,7 +1,5 @@
-from django.contrib import messages
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import request
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -15,7 +13,6 @@ class RegisterUser(SuccessMessageMixin, CreateView):
     form_class = UserCreationForm
     template_name = 'accounts/registration.html'
     success_message = "Вы успешно зарегистрировались! Авторизуйтесь, чтобы продолжить."
-    success_url = 'login'
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -25,8 +22,8 @@ class RegisterUser(SuccessMessageMixin, CreateView):
         response = super().form_valid(form)
         return response
 
-    # def get_success_url(self):
-    #     return 'login'
+    def get_success_url(self):
+        return reverse_lazy('login')
 
 
 class LoginUser(LoginView):
@@ -35,5 +32,11 @@ class LoginUser(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('main')
+
+
+class LogoutUser(LogoutView):
+
+    def get_success_url(self):
+        return reverse_lazy('login')
 
 # TODO попробовать разобраться с всплывающими сообщениями
