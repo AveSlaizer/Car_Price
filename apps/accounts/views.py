@@ -1,12 +1,11 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-DEFAULT_GROUP_NAME = 'common user'
+DEFAULT_GROUP_NAME = 'common user'  # Группа, в которую по умолчанию попадает новый пользователь
 
 
 class RegisterUser(SuccessMessageMixin, CreateView):
@@ -23,11 +22,10 @@ class RegisterUser(SuccessMessageMixin, CreateView):
         return response
 
     def get_success_url(self):
-        return reverse_lazy('login')
+        return reverse_lazy('main')
 
 
 class LoginUser(LoginView):
-    form_class = AuthenticationForm
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
@@ -37,6 +35,4 @@ class LoginUser(LoginView):
 class LogoutUser(LogoutView):
 
     def get_success_url(self):
-        return reverse_lazy('login')
-
-# TODO попробовать разобраться с всплывающими сообщениями
+        return reverse_lazy('main')
