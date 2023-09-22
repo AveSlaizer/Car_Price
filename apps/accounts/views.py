@@ -24,15 +24,3 @@ class RegisterUser(SuccessMessageMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy('main')
 
-
-class LoginUser(LoginView):
-    template_name = 'accounts/login.html'
-
-    def get_success_url(self):
-        return reverse_lazy('main')
-
-
-class LogoutUser(LogoutView):
-
-    def get_success_url(self):
-        return reverse_lazy('main')
