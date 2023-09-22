@@ -1,5 +1,5 @@
 from django.db import models
-from apps.garage.models import Transport
+# from apps.garage.models import Transport
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 
@@ -17,7 +17,7 @@ class ExpenseTypes(models.Model):
 
 class FinanceExpense(models.Model):
     transport = models.ForeignKey(
-        Transport,
+        'garage.Transport',
         on_delete=models.CASCADE,
         verbose_name="Транспорт"
     )

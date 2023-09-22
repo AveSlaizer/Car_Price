@@ -97,23 +97,30 @@ class Transport(models.Model):
     )
     fuel_type = models.ForeignKey(
         'FuelType',
-        null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.PROTECT,
+        verbose_name='Топливо'
     )
     transmission_type = models.ForeignKey(
         'TransmissionType',
-        null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.PROTECT,
+        verbose_name='Коробка'
     )
     drive_type = models.ForeignKey(
         'DriveType',
-        null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.PROTECT,
+        verbose_name='Привод'
     )
     category = models.ForeignKey(
         'TransportCategory',
+        on_delete=models.PROTECT,
+        verbose_name='Категория'
+    )
+
+    owner = models.ForeignKey(
+        'auth.user',
         null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name='Владелец'
     )
 
     def __str__(self):
