@@ -1,8 +1,14 @@
 {% extends 'base_page.html' %}
 
 {% block content %}
-<div class="container">
-    <h1> Это страница гаража </h1>
-    <p>тута будет список машинкаф</p>
-</div>
+    {% if request.user.is_authenticated %}
+        <div class="container w-50 mt-3">
+            <h4> Это ваш гараж </h4>
+        </div>
+    {% else %}
+        <div class="container w-50 mt-3">
+            <h4><a href="{% url 'login' %}">Авторизуйтесь</a>, чтобы получить доступ к странице гаража </h4>
+        </div>
+    {% endif %}
+
 {% endblock content %}
