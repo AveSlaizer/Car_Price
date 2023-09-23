@@ -4,6 +4,12 @@
     {% if request.user.is_authenticated %}
         <div class="container w-50 mt-3">
             <h4> Это ваш гараж </h4>
+            <a href="{% url 'add_transport' %}">
+                <button type="button" class="btn btn-primary btn-lg">
+                    Добавить транспорт
+                </button>
+            </a>
+
         </div>
     {% else %}
         <div class="container w-50 mt-3">

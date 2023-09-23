@@ -14,6 +14,13 @@
                     <li class="nav-item nav col-4">
                         <a class="nav-link fs-4" href="{% url 'garage' %}"> Гараж </a>
                     </li>
+                    {# Ссылка на панель администрирования #}
+                    {% if request.user.is_staff %}
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href="{% url 'admin:index' %}"> Админ </a>
+                        </li>
+                    {% endif %}
+                    {# Варианты отображения страницы в зависимости от состояния авторизации #}
                     {% if request.user.is_authenticated %}
                         <li class="nav-item nav col-6">
                             <a class="nav-link fs-4" href="{% url 'profile' %}"> Личный кабинет </a>

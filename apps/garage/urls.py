@@ -1,6 +1,9 @@
 from django.urls import path, re_path
-from apps.garage.views import Garage
+from django.views.generic import TemplateView
+from .views import AddTransport
 
 urlpatterns = [
-    path('', Garage.show_garage_page, kwargs={'page': 'garage'}, name='garage'),
+    path('', TemplateView.as_view(template_name='garage/garage.html'), name='garage'),
+    path('add_transport/', AddTransport.as_view(), name='add_transport'),
+    #re_path(r'\w+', TemplateView.as_view(template_name='garage/garage.html'), name='garage'),
 ]

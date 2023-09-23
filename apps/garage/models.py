@@ -3,7 +3,6 @@ from datetime import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
-# Create your models here.
 class FuelType(models.Model):
     fuel_type = models.CharField(
         primary_key=True,
@@ -65,13 +64,17 @@ class TransportCategory(models.Model):
 
 
 class Transport(models.Model):
+    class Meta:
+        verbose_name = 'Транспорт'
+        verbose_name_plural = 'Транспорт'
+
     brand = models.CharField(
-        default="Марка",
+        null=True,
         max_length=30,
-        verbose_name="Марка"
+        verbose_name="Марка",
     )
     model = models.CharField(
-        default="Модель",
+        null=True,
         max_length=30,
         verbose_name="Модель"
     )
@@ -81,37 +84,41 @@ class Transport(models.Model):
         verbose_name="Год выпуска"
     )
     engine_volume = models.FloatField(
-        default=1.6,
+        null=True,
         validators=[MinValueValidator(0), MaxValueValidator(100.0)],
         verbose_name="Объем двигателя, л"
     )
     engine_power = models.FloatField(
-        default=1,
+        null=True,
         validators=[MinValueValidator(0.1)],
         verbose_name="Мощность, л/с"
     )
     odometer = models.IntegerField(
-        default=12345,
-        null=False, validators=[MinValueValidator(1)],
+        null=True,
+        validators=[MinValueValidator(1)],
         verbose_name="Пробег, км"
     )
     fuel_type = models.ForeignKey(
         'FuelType',
+        default=FuelType.objects.all().first().pk,
         on_delete=models.PROTECT,
         verbose_name='Топливо'
     )
     transmission_type = models.ForeignKey(
         'TransmissionType',
+        default=TransmissionType.objects.all().first().pk,
         on_delete=models.PROTECT,
         verbose_name='Коробка'
     )
     drive_type = models.ForeignKey(
         'DriveType',
+        default=DriveType.objects.all().first().pk,
         on_delete=models.PROTECT,
         verbose_name='Привод'
     )
     category = models.ForeignKey(
         'TransportCategory',
+        default=TransportCategory.objects.all().first().pk,
         on_delete=models.PROTECT,
         verbose_name='Категория'
     )
@@ -125,7 +132,3 @@ class Transport(models.Model):
 
     def __str__(self):
         return f"{self.brand} {self.model} {self.year}г"
-
-    class Meta:
-        verbose_name = 'Транспорт'
-        verbose_name_plural = 'Транспорт'
