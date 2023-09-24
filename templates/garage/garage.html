@@ -2,19 +2,59 @@
 
 {% block content %}
     {% if request.user.is_authenticated %}
-        <div class="container w-50 mt-3">
+
             <h4> Это ваш гараж </h4>
             <a href="{% url 'add_transport' %}">
                 <button type="button" class="btn btn-primary btn-lg">
                     Добавить транспорт
                 </button>
             </a>
-
-        </div>
+        {% if transport_list %}
+            <div class="mt-3">
+                {% for transport in transport_list %}
+                    <div class="card text-bg-light mb-3 border-primary text-primary" style="max-width: 940px;">
+                        <div class="row g-0">
+                            <div class="col-md-3">
+                                <img src="..." class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ transport.brand }} {{ transport.model }} {{ transport.year }}</h5>
+                                    <ul class="list-group list-group-horizontal">
+                                        <li class="list-group-item col-3 border-primary">Пробег:</li>
+                                        <li class="list-group-item col-3 border-primary">{{ transport.odometer }} км.</li>
+                                        <li class="list-group-item col-3 border-primary">Мощность:</li>
+                                        <li class="list-group-item col-3 border-primary">{{ transport.engine_power }} л.с.</li>
+                                    </ul>
+                                    <ul class="list-group list-group-horizontal">
+                                        <li class="list-group-item col-3 border-primary">Объем:</li>
+                                        <li class="list-group-item col-3 border-primary">{{ transport.engine_volume }} л.</li>
+                                        <li class="list-group-item col-3 border-primary">Коробка:</li>
+                                        <li class="list-group-item col-3 border-primary">{{ transport.transmission_type }}</li>
+                                    </ul>
+                                    <ul class="list-group list-group-horizontal">
+                                        <li class="list-group-item col-3 border-primary">Привод:</li>
+                                        <li class="list-group-item col-3 border-primary">{{ transport.drive_type }}</li>
+                                        <li class="list-group-item col-3 border-primary">Топливо:</li>
+                                        <li class="list-group-item col-3 border-primary">{{ transport.fuel_type }}</li>
+                                    </ul>
+                                    {% if transport.description %}
+                                        <p class="card-text mb-0">
+                                            <small class="text-body-secondary">Описание: {{ transport.description }}</small>
+                                        </p>
+                                    {% endif %}
+                                    <p class="card-text"><small class="text-body-secondary">Транспорт
+                                        добавлен: {{ transport.add_date }}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h5 class="mt-3">Вы еще не добавили ни одного транспортного средства...</h5>
+        {% endif %}
     {% else %}
-        <div class="container w-50 mt-3">
             <h4><a href="{% url 'login' %}">Авторизуйтесь</a>, чтобы получить доступ к странице гаража </h4>
-        </div>
     {% endif %}
-
 {% endblock content %}

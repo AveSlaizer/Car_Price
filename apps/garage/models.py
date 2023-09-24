@@ -7,7 +7,7 @@ class FuelType(models.Model):
     fuel_type = models.CharField(
         primary_key=True,
         max_length=20,
-        verbose_name="Тип топлива"
+        verbose_name='Тип топлива'
     )
 
     def __str__(self):
@@ -22,7 +22,7 @@ class TransmissionType(models.Model):
     gearbox_type = models.CharField(
         primary_key=True,
         max_length=20,
-        verbose_name="Тип КПП"
+        verbose_name='Тип КПП'
     )
 
     def __str__(self):
@@ -37,7 +37,7 @@ class DriveType(models.Model):
     drive_type = models.CharField(
         primary_key=True,
         max_length=20,
-        verbose_name="Тип привода"
+        verbose_name='Тип привода'
     )
 
     def __str__(self):
@@ -52,7 +52,14 @@ class TransportCategory(models.Model):
     category = models.CharField(
         primary_key=True,
         max_length=20,
-        verbose_name="Категория"
+        verbose_name='Категория'
+    )
+
+    image = models.ImageField(
+        null=True,
+        blank=True,
+        upload_to='images/garage/transport_cat/',
+        verbose_name='Изображение'
     )
 
     def __str__(self):

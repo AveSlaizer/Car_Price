@@ -1,7 +1,8 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.urls import reverse_lazy
 from .forms import AddTransportForm
+from .models import Transport
 
 
 class AddTransport(SuccessMessageMixin, CreateView):
@@ -18,3 +19,13 @@ class AddTransport(SuccessMessageMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('garage')
+
+
+class GarageView(ListView):
+    model = Transport
+    context_object_name = 'transport_list'
+    template_name = 'garage/garage.html'
+
+    def get_queryset(self):
+        return Transport.objects.filter(owner=self.request.user.id)
+
