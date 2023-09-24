@@ -14,8 +14,8 @@
                 {% for transport in transport_list %}
                     <div class="card text-bg-light mb-3 border-primary text-primary" style="max-width: 940px;">
                         <div class="row g-0">
-                            <div class="col-md-3">
-                                <img src="..." class="img-fluid rounded-start" alt="...">
+                            <div class="col-md-3" style="padding-left: 5px;">
+                                <img src="{{ transport.category.image.url }}" class="img-fluid rounded-start" alt="{{ transport.category }}">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -44,7 +44,7 @@
                                         </p>
                                     {% endif %}
                                     <p class="card-text"><small class="text-body-secondary">Транспорт
-                                        добавлен: {{ transport.add_date }}</small></p>
+                                        добавлен: {{ transport.add_date|date:"d.m.Y H:i" }}</small></p>
                                 </div>
                             </div>
                         </div>

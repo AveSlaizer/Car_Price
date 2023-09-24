@@ -1,5 +1,6 @@
-from django.urls import path, re_path
-from django.views.generic import TemplateView
+from django.conf.urls.static import static
+from django.urls import path
+from config import settings
 from .views import AddTransport, GarageView
 
 urlpatterns = [

@@ -49,6 +49,10 @@ class DriveType(models.Model):
 
 
 class TransportCategory(models.Model):
+    class Meta:
+        verbose_name = 'Категория транспорта'
+        verbose_name_plural = 'Категории транспорта'
+
     category = models.CharField(
         primary_key=True,
         max_length=20,
@@ -64,10 +68,6 @@ class TransportCategory(models.Model):
 
     def __str__(self):
         return self.category
-
-    class Meta:
-        verbose_name = 'Категория транспорта'
-        verbose_name_plural = 'Категории транспорта'
 
 
 class Transport(models.Model):
