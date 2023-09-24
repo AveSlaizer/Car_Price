@@ -13,6 +13,6 @@ def show_garage(request):
 def show_account(request):
     return render(request, 'personal_account.html')
 
-# TODO реализовать добавление транспорта в гараж пользователя
+# TODO настроить приложение garage в разделе администрирование
 # TODO реализовать отображения карточек транспорта в гараже пользователя
 

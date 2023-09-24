@@ -5,5 +5,4 @@ from .views import AddTransport
 urlpatterns = [
     path('', TemplateView.as_view(template_name='garage/garage.html'), name='garage'),
     path('add_transport/', AddTransport.as_view(), name='add_transport'),
-    #re_path(r'\w+', TemplateView.as_view(template_name='garage/garage.html'), name='garage'),
 ]
