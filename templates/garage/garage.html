@@ -42,9 +42,13 @@
                                         <li class="list-group-item col-3 border-primary">{{ transport.engine_power }}
                                             л.с.
                                         </li>
-                                        <a href="#" class="pb-0 list-group-item list-group-item-action list-group-item-success text-success">
-                                            <h5>&gt;</h5>
-                                        </a>
+                                        <form action="{% url 'add_expense' transport.id %}" method="get">
+                                            <input type="hidden" name="transport_id" value="{{ transport.id }}">
+                                            <button type="submit"
+                                                    class="pb-0 list-group-item list-group-item-action list-group-item-success text-success">
+                                                <h5>&gt;</h5>
+                                            </button>
+                                        </form>
                                     </ul>
                                     <ul class="list-group list-group-horizontal">
                                         <li class="list-group-item col-3 border-primary">Объем:</li>
