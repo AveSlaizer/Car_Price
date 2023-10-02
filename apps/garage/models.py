@@ -146,7 +146,7 @@ class Transport(models.Model):
         blank=True,
         max_length=150,
         verbose_name='Описание',
-        help_text='Введите какое-нибудь описание транспортного средства.\n'
+        help_text='Введите описание транспортного средства.\n'
                   'Например гос. номер. Не обязательно для заполнения'
     )
 
@@ -163,4 +163,4 @@ class Transport(models.Model):
     )
 
     def __str__(self):
-        return f"{self.brand} {self.model} {self.year}г"
+        return f"{self.brand} {self.model} {self.year}г."

@@ -12,6 +12,7 @@ class RegisterUser(SuccessMessageMixin, CreateView):
     template_name = 'accounts/registration.html'
     success_message = "Вы успешно зарегистрировались! Авторизуйтесь, чтобы продолжить."
 
+# FIXME убрать добавление нового пользователя в группу.
     def form_valid(self, form):
         user = form.save(commit=False)
         user.save()
