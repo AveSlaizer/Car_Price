@@ -11,6 +11,10 @@ class AddFinanceExpenses(SuccessMessageMixin, CreateView):
     template_name = 'finance_expenses/add_expense.html'
     success_message = 'Запись успешно добавлена'
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.transport_obj = None
+
     def get_transport(self):
         transport_id = self.request.GET.get('transport_id')
         self.transport_obj = Transport.objects.get(pk=transport_id)
@@ -24,13 +28,12 @@ class AddFinanceExpenses(SuccessMessageMixin, CreateView):
         return initial
 
     def form_valid(self, form):
-        finance_record = form.save(commit=False)
-        finance_record.save()
-        self.transport_obj.odometer = finance_record['odometer']
-        self.transport_obj.save()
+        form_odometer = form.cleaned_data['odometer']
+        if form_odometer > self.transport_obj.odometer:
+            self.transport_obj.odometer = form_odometer
+            self.transport_obj.save()
         response = super().form_valid(form)
         return response
-# FIXME обновить пробег ТС при добавлении новой записи о расходах
 
     def get_success_url(self):
         return reverse_lazy('garage')
