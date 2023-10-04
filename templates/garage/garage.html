@@ -15,7 +15,7 @@
 
                 {% for transport in transport_list %}
 
-                    <div class="card text-bg-light mb-3 border-primary text-primary" style="max-width: 940px;">
+                    <div class="card text-bg-light mb-3 border-primary text-primary shadow" style="max-width: 940px;">
                         <div class="row g-0">
                             <div class="col-md-3" style="padding-left: 5px;">
                                 <img src="{{ transport.category.image.url }}" class="img-fluid rounded-start"
@@ -53,25 +53,64 @@
                                     </ul>
 
                                     <div class="container mt-2">
-                                        <div class="row justify-content-start">
-                                            <div class="col-3">
 
+                                        <div class="row justify-content-start">
+
+                                            <div class="col-3">
                                                 <form action="{% url 'add_expense' %}" method="get">
                                                     <input type="hidden" name="transport_id" value="{{ transport.id }}">
-                                                    <button type="submit" class="btn btn-success">Сделать&nbsp;запись
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Сделать&nbsp;запись
                                                     </button>
                                                 </form>
                                             </div>
+
+                                            <div class="col-2 btn-group">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Меню
+                                                </button>
+                                                <ul class="dropdown-menu shadow">
+                                                    <li>
+                                                        <form action="{% url 'expenses_table' %}" method="get">
+                                                            <input type="hidden" name="transport_id"
+                                                                   value="{{ transport.id }}">
+                                                            <button type="submit" class="dropdown-item">Все
+                                                                записи</button>
+                                                        </form>
+                                                    </li>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#">Другое действие</a></li>
+                                                    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <button class="btn btn-info" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapse{{ transport.id }}"
+                                                        aria-expanded="false"
+                                                        aria-controls="collapse{{ transport.id }}"> Инфо
+                                                </button>
+                                            </div>
+
                                         </div>
 
-                                        {% if transport.description %}
-                                            <p class="card-text mb-0">
-                                                <small class="text-body-secondary">Описание: {{ transport.description }}</small>
-                                            </p>
-                                        {% endif %}
+                                        <div class="collapse" id="collapse{{ transport.id }}">
+                                            <div class="card card-body text-body-secondary mt-2">
+                                                <p class="card-text mb-0">
+                                                    Транспорт добавлен {{ transport.add_date|date:"d.m.Y H:i" }}
+                                                </p>
+                                                {% if transport.description %}
+                                                    <hr class="m-2">
+                                                    <p class="card-text">
+                                                        Описание: {{ transport.description }}
+                                                    </p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
 
-                                        <p class="card-text"><small class="text-body-secondary">Транспорт
-                                            добавлен: {{ transport.add_date|date:"d.m.Y H:i" }}</small></p>
                                     </div>
                                 </div>
                             </div>

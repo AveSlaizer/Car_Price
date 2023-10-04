@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-        <div class="container mt-3 w-75 p-3 border rounded-3 border-2 border-primary-subtle">
+    <div class="container mt-3 w-75 p-3 border rounded-3 border-2 border-primary-subtle">
         <h4 class="container mb-3 text-primary">Запись для {{ transport_name }} Заполните поля</h4>
         <form method="post">
             {% csrf_token %}
