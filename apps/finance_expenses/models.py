@@ -1,10 +1,13 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils import timezone
 import datetime
 
 
 class ExpenseTypes(models.Model):
+    class Meta:
+        verbose_name = 'Категория трат на ТС'
+        verbose_name_plural = 'Категории трат на ТС'
+
     expense_type = models.CharField(
         primary_key=True,
         max_length=30,
@@ -16,6 +19,11 @@ class ExpenseTypes(models.Model):
 
 
 class FinanceExpense(models.Model):
+    class Meta:
+        verbose_name = 'Трата на ТС'
+        verbose_name_plural = 'Траты на ТС'
+        ordering = ['add_date']
+
     transport = models.ForeignKey(
         'garage.Transport',
         on_delete=models.CASCADE,
