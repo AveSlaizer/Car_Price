@@ -6,3 +6,6 @@ class AddFinanceExpensesForm(forms.ModelForm):
     class Meta:
         model = FinanceExpense
         fields = ['transport', 'summ', 'date', 'odometer', 'expense_type', ]
+        widgets = {
+            'transport': forms.HiddenInput()
+        }

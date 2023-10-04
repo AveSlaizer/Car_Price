@@ -38,7 +38,7 @@ class FinanceExpense(models.Model):
     date = models.DateField(
         default=datetime.date.today(),
         validators=[MaxValueValidator(datetime.date.today())],
-        verbose_name="Дата",
+        verbose_name="Дата трат",
         help_text='Выберите дату'
     )
     odometer = models.PositiveIntegerField(

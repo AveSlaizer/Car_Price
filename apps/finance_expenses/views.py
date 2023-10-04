@@ -27,6 +27,11 @@ class AddFinanceExpenses(SuccessMessageMixin, CreateView):
         initial['date'] = datetime.date.today()
         return initial
 
+    def get_context_data(self, **kwargs):
+        context = super(AddFinanceExpenses, self).get_context_data(**kwargs)
+        context['transport_name'] = self.transport_obj
+        return context
+
     def form_valid(self, form):
         form_odometer = form.cleaned_data['odometer']
         if form_odometer > self.transport_obj.odometer:
