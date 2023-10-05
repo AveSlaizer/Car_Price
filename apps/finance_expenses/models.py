@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
 import datetime
 
 
@@ -18,6 +19,7 @@ class ExpenseTypes(models.Model):
         return self.expense_type
 
 
+# TODO добавить поле заметки (description)
 class FinanceExpense(models.Model):
     class Meta:
         verbose_name = 'Трата на ТС'
@@ -30,14 +32,13 @@ class FinanceExpense(models.Model):
         verbose_name="Транспорт"
     )
     summ = models.FloatField(
-        blank=True,
         validators=[MinValueValidator(0)],
         verbose_name="Сумма",
         help_text="Укажите сумму израсходованных средств."
     )
     date = models.DateField(
-        default=datetime.date.today(),
-        validators=[MaxValueValidator(datetime.date.today())],
+        default=timezone.now().date(),
+        validators=[MaxValueValidator(timezone.now().date())],
         verbose_name="Дата трат",
         help_text='Выберите дату'
     )
@@ -56,6 +57,12 @@ class FinanceExpense(models.Model):
     add_date = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Дата добавления'
+    )
+    description = models.TextField(
+        blank=True,
+        max_length=250,
+        verbose_name='Заметки',
+        help_text='Здесь можно написать заметки о трате'
     )
 
     def __str__(self):

@@ -66,7 +66,8 @@ class ShowFinanceExpenses(ListView):
             field.verbose_name for field in self.model._meta.get_fields() if field.verbose_name != 'Транспорт' and
                                                                              field.verbose_name != 'ID'
         ]
-        initial['rows'] = list(self.queryset.values('summ', 'date', 'odometer', 'expense_type', 'add_date'))
+        initial['rows'] = list(self.queryset.values('summ', 'date', 'odometer',
+                                                    'expense_type', 'add_date', 'description'))
         self.get_transport()
         initial['transport_name'] = self.transport_obj
         return initial
