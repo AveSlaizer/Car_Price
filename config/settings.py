@@ -133,6 +133,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Crispy forms
+
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Default redirect URLs

@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -55,17 +56,17 @@ class ShowFinanceExpenses(ListView):
         self.transport_obj = Transport.objects.get(pk=transport_id)
 
     def get_queryset(self):
-        queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id'))\
+        queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id')) \
             .order_by('-date', '-odometer')
         self.queryset = queryset
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         initial = super(ShowFinanceExpenses, self).get_context_data(**kwargs)
-        initial['header'] = [
-            field.verbose_name for field in self.model._meta.get_fields() if field.verbose_name != 'Транспорт' and
-                                                                             field.verbose_name != 'ID'
-        ]
+        # FIXME причесать этот метод
+        initial['total_expenses'] = self.queryset.values().aggregate(Sum('summ'))['summ__sum']
+        initial['header'] = [field.verbose_name for field in self.model._meta.get_fields() if
+                             field.verbose_name != 'Транспорт' and field.verbose_name != 'ID']
         initial['rows'] = list(self.queryset.values('summ', 'date', 'odometer',
                                                     'expense_type', 'add_date', 'description'))
         self.get_transport()

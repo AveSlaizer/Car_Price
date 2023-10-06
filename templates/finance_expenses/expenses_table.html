@@ -2,7 +2,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-    <h4 class="container mb-3 text-primary">Все траты на {{ transport_name }}</h4>
+    {% if rows %}
+
+    <h4 class="container mb-3 text-primary">Все траты на '{{ transport_name }}' составляют {{ total_expenses }} р.</h4>
     <table class="table text-center">
         <thead>
         <tr>
@@ -21,5 +23,10 @@
             </tr>
         {% endfor %}
     </table>
+    {% else %}
+
+        <h4 class="container mb-3 text-primary">Не обнаружены записи о тратах для '{{ transport_name }}'</h4>
+
+    {% endif %}
 
 {% endblock content %}

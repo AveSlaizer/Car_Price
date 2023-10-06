@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
-import datetime
 
 
 class ExpenseTypes(models.Model):
@@ -19,7 +18,6 @@ class ExpenseTypes(models.Model):
         return self.expense_type
 
 
-# TODO добавить поле заметки (description)
 class FinanceExpense(models.Model):
     class Meta:
         verbose_name = 'Трата на ТС'
