@@ -26,6 +26,7 @@ class AddFinanceExpenses(SuccessMessageMixin, CreateView):
         self.get_transport()
         initial['transport'] = self.transport_obj
         initial['odometer'] = self.transport_obj.odometer
+        # TODO протестировать с django.utils.timezone
         initial['date'] = datetime.date.today()
         return initial
 
@@ -51,20 +52,23 @@ class ShowFinanceExpenses(ListView):
     context_object_name = 'expenses'
     template_name = 'finance_expenses/expenses_table.html'
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.transport_obj = None
+
     def get_transport(self):
         transport_id = self.request.GET.get('transport_id')
         self.transport_obj = Transport.objects.get(pk=transport_id)
 
     def get_queryset(self):
-        queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id')) \
+        self.queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id')) \
             .order_by('-date', '-odometer')
-        self.queryset = queryset
-        return queryset
+        return self.queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         initial = super(ShowFinanceExpenses, self).get_context_data(**kwargs)
-        # FIXME причесать этот метод
-        initial['total_expenses'] = self.queryset.values().aggregate(Sum('summ'))['summ__sum']
+        # TODO причесать этот метод
+        initial['total_expenses'] = self.queryset.values().aggregate(total=Sum('summ'))['total']
         initial['header'] = [field.verbose_name for field in self.model._meta.get_fields() if
                              field.verbose_name != 'Транспорт' and field.verbose_name != 'ID']
         initial['rows'] = list(self.queryset.values('summ', 'date', 'odometer',

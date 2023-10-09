@@ -75,14 +75,23 @@
                                                         <form action="{% url 'expenses_table' %}" method="get">
                                                             <input type="hidden" name="transport_id"
                                                                    value="{{ transport.id }}">
-                                                            <button type="submit" class="dropdown-item">Все
-                                                                записи</button>
+                                                            <button type="submit" class="dropdown-item">
+                                                                Все записи
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                    <li>
+                                                        <form action="{% url 'month_graph' %}" method="get">
+                                                            <input type="hidden" name="transport_id"
+                                                                   value="{{ transport.id }}">
+                                                            <button type="submit" class="dropdown-item">
+                                                                Все записи
+                                                            </button>
                                                         </form>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
-                                                    <li><a class="dropdown-item" href="#">Другое действие</a></li>
                                                     <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
                                                 </ul>
                                             </div>
