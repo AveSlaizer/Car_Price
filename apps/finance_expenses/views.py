@@ -101,6 +101,7 @@ class GraphView(FormView):
 
     def form_valid(self, form):
         print(form.cleaned_data)
+
         response = super().form_valid(form)
         return response
 
