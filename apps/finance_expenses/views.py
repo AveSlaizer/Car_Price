@@ -1,12 +1,15 @@
 from django.db.models import Sum
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, FormView
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import AddFinanceExpensesForm
+
+from .forms import AddFinanceExpensesForm, MonthGraphSelectForm
 from ..garage.models import Transport
 from .models import FinanceExpense
 import datetime
 
+
+# TODO Вынести метод get_transport из классов в миксин
 
 class AddFinanceExpenses(SuccessMessageMixin, CreateView):
     form_class = AddFinanceExpensesForm
@@ -76,3 +79,30 @@ class ShowFinanceExpenses(ListView):
         self.get_transport()
         initial['transport_name'] = self.transport_obj
         return initial
+
+
+class GraphView(FormView):
+    form_class = MonthGraphSelectForm
+    template_name = 'finance_expenses/graphs.html'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.transport_obj = None
+
+    def get_transport(self):
+        transport_id = self.request.GET.get('transport_id')
+        self.transport_obj = Transport.objects.get(pk=transport_id)
+
+    def get_initial(self):
+        initial = super(GraphView, self).get_initial()
+        self.get_transport()
+        initial['transport'] = self.transport_obj
+        return initial
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        response = super().form_valid(form)
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy('main')
