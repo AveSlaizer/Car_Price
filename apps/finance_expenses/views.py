@@ -1,17 +1,25 @@
-from django.db.models import Sum
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, FormView
+from django.views.generic import CreateView, FormView
 from django.contrib.messages.views import SuccessMessageMixin
+from django_tables2 import SingleTableView
+from django.utils import timezone
 
 from .forms import AddFinanceExpensesForm, MonthGraphSelectForm
+from .tables import FinanceExpenseTable
 from ..garage.models import Transport
 from .models import FinanceExpense
-import datetime
+
+
+class DataMixin:
+
+    @staticmethod
+    def get_transport(request):
+        return Transport.objects.get(pk=request.GET.get('transport_id'))
 
 
 # TODO Вынести метод get_transport из классов в миксин
 
-class AddFinanceExpenses(SuccessMessageMixin, CreateView):
+class AddFinanceExpenses(DataMixin, SuccessMessageMixin, CreateView):
     form_class = AddFinanceExpensesForm
     template_name = 'finance_expenses/add_expense.html'
     success_message = 'Запись успешно добавлена'
@@ -20,17 +28,12 @@ class AddFinanceExpenses(SuccessMessageMixin, CreateView):
         super().__init__(**kwargs)
         self.transport_obj = None
 
-    def get_transport(self):
-        transport_id = self.request.GET.get('transport_id')
-        self.transport_obj = Transport.objects.get(pk=transport_id)
-
     def get_initial(self):
         initial = super(AddFinanceExpenses, self).get_initial()
-        self.get_transport()
+        self.transport_obj = self.get_transport(self.request)
         initial['transport'] = self.transport_obj
         initial['odometer'] = self.transport_obj.odometer
-        # TODO протестировать с django.utils.timezone
-        initial['date'] = datetime.date.today()
+        initial['date'] = timezone.now().date()
         return initial
 
     def get_context_data(self, **kwargs):
@@ -50,38 +53,17 @@ class AddFinanceExpenses(SuccessMessageMixin, CreateView):
         return reverse_lazy('garage')
 
 
-class ShowFinanceExpenses(ListView):
+class FinanceExpensesTableView(SingleTableView):
     model = FinanceExpense
-    context_object_name = 'expenses'
+    table_class = FinanceExpenseTable
     template_name = 'finance_expenses/expenses_table.html'
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.transport_obj = None
-
-    def get_transport(self):
-        transport_id = self.request.GET.get('transport_id')
-        self.transport_obj = Transport.objects.get(pk=transport_id)
-
     def get_queryset(self):
-        self.queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id')) \
-            .order_by('-date', '-odometer')
+        self.queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id'))
         return self.queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        initial = super(ShowFinanceExpenses, self).get_context_data(**kwargs)
-        # TODO причесать этот метод
-        initial['total_expenses'] = self.queryset.values().aggregate(total=Sum('summ'))['total']
-        initial['header'] = [field.verbose_name for field in self.model._meta.get_fields() if
-                             field.verbose_name != 'Транспорт' and field.verbose_name != 'ID']
-        initial['rows'] = list(self.queryset.values('summ', 'date', 'odometer',
-                                                    'expense_type', 'add_date', 'description'))
-        self.get_transport()
-        initial['transport_name'] = self.transport_obj
-        return initial
 
-
-class GraphView(FormView):
+class GraphView(DataMixin, FormView):
     form_class = MonthGraphSelectForm
     template_name = 'finance_expenses/graphs.html'
 
@@ -89,13 +71,9 @@ class GraphView(FormView):
         super().__init__(**kwargs)
         self.transport_obj = None
 
-    def get_transport(self):
-        transport_id = self.request.GET.get('transport_id')
-        self.transport_obj = Transport.objects.get(pk=transport_id)
-
     def get_initial(self):
         initial = super(GraphView, self).get_initial()
-        self.get_transport()
+        self.transport_obj = self.get_transport(self.request)
         initial['transport'] = self.transport_obj
         return initial
 

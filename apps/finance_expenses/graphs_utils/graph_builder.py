@@ -3,7 +3,8 @@ from apps.finance_expenses.graphs_utils.month_bars import MonthBars
 GRAPH_UTILS_SETTINGS = {
     'MonthBars': {'verbose_name': 'Столбцы за месяц', 'class': MonthBars, 'period': 'month'},
 }
-# Вывести настройки классов в классы
+# TODO Вывести настройки классов в классы
+# TODO Вывести константы в отдельный модуль
 
 MONTH_GRAPH_CHOICES = [(i[0], i[1].get('verbose_name')) for i in GRAPH_UTILS_SETTINGS.items() if
                        i[1].get('period') == 'month']

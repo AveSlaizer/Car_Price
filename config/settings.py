@@ -31,14 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
-    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_tables2',
+    'crispy_forms',
+    'crispy_bootstrap5',
+
     'apps.mainpage',
     'apps.garage.apps.GarageConfig',
     'apps.finance_expenses.apps.FinanceExpensesConfig',
@@ -136,6 +139,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Crispy forms
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# Tables
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap5.html"
 
 # Default redirect URLs
 
