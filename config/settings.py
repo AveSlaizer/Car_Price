@@ -37,6 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_tables2',
+    'crispy_forms',
+    'crispy_bootstrap5',
+
+    'apps.mainpage',
+    'apps.garage.apps.GarageConfig',
+    'apps.finance_expenses.apps.FinanceExpensesConfig',
+    'apps.accounts',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -126,3 +135,25 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Crispy forms
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+# Tables
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap5.html"
+
+# Default redirect URLs
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+# Media
+
+MEDIA_DIR = BASE_DIR / 'media'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/'

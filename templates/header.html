@@ -1,0 +1,43 @@
+<header>
+    <nav class="navbar navbar-expand-lg bg-primary-subtle">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item nav col-4">
+                        <a class="nav-link fs-4" href="{% url 'main' %}"> Главная </a>
+                    </li>
+                    <li class="nav-item nav col-4">
+                        <a class="nav-link fs-4" href="{% url 'garage' %}"> Гараж </a>
+                    </li>
+                    {# Ссылка на панель администрирования #}
+                    {% if request.user.is_staff %}
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href="{% url 'admin:index' %}"> Админ </a>
+                        </li>
+                    {% endif %}
+                    {# Варианты отображения страницы в зависимости от состояния авторизации #}
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item nav col-6">
+                            <a class="nav-link fs-4" href="{% url 'profile' %}"> Личный кабинет </a>
+                        </li>
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href="{% url 'logout' %}"> Выход </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href="{% url 'login' %}"> Вход </a>
+                        </li>
+                        <li class="nav-item nav col-4">
+                            <a class="nav-link fs-4" href="{% url 'registration' %}"> Регистрация </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
