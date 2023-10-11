@@ -3,35 +3,6 @@
 {% load render_table from django_tables2 %}
 {% block content %}
 
-
-            {% render_table table %}
-
-
-{#    {% if rows %}#}
-{##}
-{#    <h4 class="container mb-3 text-primary">Все траты на '{{ transport_name }}' составляют {{ total_expenses }} р.</h4>#}
-{#    <table class="table text-center">#}
-{#        <thead>#}
-{#        <tr>#}
-{#            {% for item in header %}#}
-{#                <th>{{ item }}</th>#}
-{#            {% endfor %}#}
-{#        </tr>#}
-{#        </thead>#}
-{#        {% for row in rows %}#}
-{#            <tr>#}
-{#                {% for cell in row.values %}#}
-{#                    <td>#}
-{#                        {{ cell }}#}
-{#                    </td>#}
-{#                {% endfor %}#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#    </table>#}
-{#    {% else %}#}
-{##}
-{#        <h4 class="container mb-3 text-primary">Не обнаружены записи о тратах для '{{ transport_name }}'</h4>#}
-{##}
-{#    {% endif %}#}
+    {% render_table table %}
 
 {% endblock content %}

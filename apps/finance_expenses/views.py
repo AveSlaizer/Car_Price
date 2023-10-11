@@ -1,23 +1,14 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django_tables2 import SingleTableView
 from django.utils import timezone
 
-from .forms import AddFinanceExpensesForm, MonthGraphSelectForm
+from .forms import AddFinanceExpensesForm
 from .tables import FinanceExpenseTable
-from ..garage.models import Transport
 from .models import FinanceExpense
+from .utils import DataMixin
 
-
-class DataMixin:
-
-    @staticmethod
-    def get_transport(request):
-        return Transport.objects.get(pk=request.GET.get('transport_id'))
-
-
-# TODO Вынести метод get_transport из классов в миксин
 
 class AddFinanceExpenses(DataMixin, SuccessMessageMixin, CreateView):
     form_class = AddFinanceExpensesForm
@@ -59,29 +50,6 @@ class FinanceExpensesTableView(SingleTableView):
     template_name = 'finance_expenses/expenses_table.html'
 
     def get_queryset(self):
-        self.queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id'))
+        self.queryset = FinanceExpense.objects.filter(transport=self.request.GET.get('transport_id'))\
+            .order_by('-odometer')
         return self.queryset
-
-
-class GraphView(DataMixin, FormView):
-    form_class = MonthGraphSelectForm
-    template_name = 'finance_expenses/graphs.html'
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.transport_obj = None
-
-    def get_initial(self):
-        initial = super(GraphView, self).get_initial()
-        self.transport_obj = self.get_transport(self.request)
-        initial['transport'] = self.transport_obj
-        return initial
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-
-        response = super().form_valid(form)
-        return response
-
-    def get_success_url(self):
-        return reverse_lazy('main')
