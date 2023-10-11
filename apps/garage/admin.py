@@ -3,10 +3,16 @@ from .models import FuelType, TransmissionType, DriveType, Transport, TransportC
 
 
 class AdminTransportCategory(admin.ModelAdmin):
+    """
+    Настройки таблицы TransportCategory для админ-панели.
+    """
     list_display = ('category', 'image')
 
 
 class AdminTransport(admin.ModelAdmin):
+    """
+    Настройки таблицы Transport для админ-панели.
+    """
     list_display = ('id', 'brand', 'model', 'year', 'odometer', 'add_date',)
     search_fields = ('model', 'brand', 'year', 'odometer',)
     list_filter = ('brand', 'model', 'year', 'engine_volume', 'engine_power', 'odometer', 'fuel_type',

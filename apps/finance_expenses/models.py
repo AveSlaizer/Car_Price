@@ -4,6 +4,9 @@ from django.utils import timezone
 
 
 class ExpenseTypes(models.Model):
+    """
+    Таблица в БД. Содержит типы расходов на ТС.
+    """
     class Meta:
         verbose_name = 'Категория трат на ТС'
         verbose_name_plural = 'Категории трат на ТС'
@@ -19,6 +22,9 @@ class ExpenseTypes(models.Model):
 
 
 class FinanceExpense(models.Model):
+    """
+    Таблица в БД. Содержит записи о тратах на ТС.
+    """
     class Meta:
         verbose_name = 'Трата на ТС'
         verbose_name_plural = 'Траты на ТС'

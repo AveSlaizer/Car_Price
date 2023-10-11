@@ -4,6 +4,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class FuelType(models.Model):
+    """
+    Таблица в БД. Содержит записи о типах топлива.
+    """
     fuel_type = models.CharField(
         primary_key=True,
         max_length=20,
@@ -19,6 +22,9 @@ class FuelType(models.Model):
 
 
 class TransmissionType(models.Model):
+    """
+    Таблица в БД. Содержит записи о типах коробок передач.
+    """
     gearbox_type = models.CharField(
         primary_key=True,
         max_length=20,
@@ -34,6 +40,9 @@ class TransmissionType(models.Model):
 
 
 class DriveType(models.Model):
+    """
+    Таблица в БД. Содержит записи о видах привода.
+    """
     drive_type = models.CharField(
         primary_key=True,
         max_length=20,
@@ -49,6 +58,9 @@ class DriveType(models.Model):
 
 
 class TransportCategory(models.Model):
+    """
+    Таблица в БД. Содержит записи о категориях ТС.
+    """
     class Meta:
         verbose_name = 'Категория транспорта'
         verbose_name_plural = 'Категории транспорта'
@@ -71,6 +83,9 @@ class TransportCategory(models.Model):
 
 
 class Transport(models.Model):
+    """
+    Таблица в БД. Содержит записи о транспорте.
+    """
     class Meta:
         verbose_name = 'Транспорт'
         verbose_name_plural = 'Транспорт'

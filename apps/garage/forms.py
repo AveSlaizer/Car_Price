@@ -4,6 +4,9 @@ from .models import Transport
 
 
 class AddTransportForm(forms.ModelForm):
+    """
+    Форма добавления записи в таблицу Transport.
+    """
     class Meta:
         model = Transport
         fields = ['brand', 'model', 'year', 'engine_volume', 'engine_power', 'odometer', 'fuel_type',
