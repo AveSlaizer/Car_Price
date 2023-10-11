@@ -45,4 +45,3 @@ class GarageView(ListView):
         Возвращает объект Queryset. Результат запроса в БД
         """
         return Transport.objects.filter(owner=self.request.user.id)
-
