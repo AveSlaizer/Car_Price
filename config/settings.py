@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'apps.mainpage',
     'apps.garage.apps.GarageConfig',
     'apps.finance_expenses.apps.FinanceExpensesConfig',
-    'apps.accounts',
+    'apps.accounts.apps.AccountsConfig',
+    'apps.month_graphs.apps.MonthGraphsConfig',
 ]
 
 MIDDLEWARE = [
