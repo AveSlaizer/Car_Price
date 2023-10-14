@@ -25,7 +25,8 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='main.html'), name='main'),
     path('garage/', include('apps.garage.urls')),
     path('accounts/', include('apps.accounts.urls')),
-    path('finance_expenses/', include('apps.finance_expenses.urls'))
+    path('finance_expenses/', include('apps.finance_expenses.urls')),
+    path('month_graphs_form/', include('apps.month_graphs.urls')),
 ]
 
 if settings.DEBUG:
