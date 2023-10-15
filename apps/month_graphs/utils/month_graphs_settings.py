@@ -1,10 +1,10 @@
-from .month_bars import MonthBars
+from .month_bars import MonthGraphBars
 
-MONTH_GRAPH_UTILITIES = [
-    'MonthBars',
-]
+MONTH_GRAPH_UTILITIES = {
+    'MonthGraphBars': MonthGraphBars,
+}
 
-MONTH_GRAPH_CHOICES = [(i, globals()[i].get_verbose_name()) for i in MONTH_GRAPH_UTILITIES]
+MONTH_GRAPH_CHOICES = [(i, globals()[i].get_verbose_name()) for i in MONTH_GRAPH_UTILITIES.keys()]
 
 MONTHS_NAMES = [
     (1, 'Январь'),
