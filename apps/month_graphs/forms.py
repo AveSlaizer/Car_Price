@@ -5,6 +5,9 @@ from apps.month_graphs.utils.month_graphs_settings import MONTH_GRAPH_CHOICES, M
 
 
 class MonthGraphSelectForm(forms.Form):
+    """
+    Форма выбора вида графика за месяц.
+    """
     username = forms.CharField(
         widget=forms.HiddenInput,
     )

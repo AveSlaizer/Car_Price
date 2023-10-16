@@ -17,8 +17,7 @@ class MonthGraphBars(MonthGraph, ABC):
         'Страховка': 'green',
         'Ремонт': 'red',
         'Пошлина': 'purple',
-        'Плановое': 'brown',
-        'ТО': 'pink',
+        'Плановое ТО': 'pink',
         'Налог': 'gray',
         'Заправка': 'olive',
         'Другое': 'cyan',
@@ -44,6 +43,9 @@ class MonthGraphBars(MonthGraph, ABC):
         """
         plt.rcParams.update({'figure.autolayout': True})
         plt.barh(self.__group_names, self.__group_data, color=self.__colors)
-        plt.title(f'Общая сумма: {sum(self.__group_data)}р.', fontsize=16)
+        if not self.__group_data and not self.__group_names:
+            plt.text(0, 0, "Данные отсутствуют", ha='center', size='xx-large')
+        else:
+            plt.title(f'Общая сумма: {sum(self.__group_data)}р.', fontsize=16)
         plt.savefig(str(path) + '\\' + self.file_name)
         plt.close()
