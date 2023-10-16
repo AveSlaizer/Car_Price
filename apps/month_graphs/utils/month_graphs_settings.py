@@ -1,11 +1,14 @@
 from .month_bars import MonthGraphBars
 
+# Словарь с названием и ссылкой на класс-построитель месячных диаграмм
 MONTH_GRAPH_UTILITIES = {
     'MonthGraphBars': MonthGraphBars,
 }
 
+# Список кортежей для отображения в форме в шаблоне. Строится автоматически.
 MONTH_GRAPH_CHOICES = [(i, globals()[i].get_verbose_name()) for i in MONTH_GRAPH_UTILITIES.keys()]
 
+# Номера и названия месяцев для отображения в форме в шаблоне.
 MONTHS_NAMES = [
     (1, 'Январь'),
     (2, 'Февраль'),
