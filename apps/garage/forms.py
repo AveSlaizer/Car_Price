@@ -26,6 +26,6 @@ class DeleteTransportForm(forms.Form):
     )
     check_box = forms.BooleanField(
         widget=forms.CheckboxInput,
-        label='Я уверен, что хочу удалить {% transport %} и все связанные с ним записи.'
+        label='Я уверен, что хочу удалить и все связанные с ним записи.'
     )
 
