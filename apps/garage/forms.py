@@ -15,3 +15,17 @@ class AddTransportForm(forms.ModelForm):
             'year': forms.NumberInput(attrs={'max': datetime.now().year, 'min': 1900}),
         }
         description = forms.CharField(required=False)
+
+
+class DeleteTransportForm(forms.Form):
+    """
+    Форма для удаления ТС из БД
+    """
+    transport = forms.CharField(
+        widget=forms.HiddenInput,
+    )
+    check_box = forms.BooleanField(
+        widget=forms.CheckboxInput,
+        label='Я уверен, что хочу удалить {% transport %} и все связанные с ним записи.'
+    )
+

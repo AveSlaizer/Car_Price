@@ -89,6 +89,15 @@
                                                             </button>
                                                         </form>
                                                     </li>
+                                                    <li>
+                                                        <form action="{% url 'delete_transport' %}" method="get">
+                                                            <input type="hidden" name="transport_id"
+                                                                   value="{{ transport.id }}">
+                                                            <button type="submit" class="dropdown-item bg-warning-subtle">
+                                                                Удалить транспорт
+                                                            </button>
+                                                        </form>
+                                                    </li>
                                                 </ul>
                                             </div>
 
