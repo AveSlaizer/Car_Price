@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="container mt-3 w-75 p-3 border rounded-3 border-2 border-primary-subtle">
-        <h4 class="container mb-3 text-primary">Выберите тип диаграммы для {{ transport_name }}</h4>
+        <h4 class="container mb-3 text-primary">Выберите тип диаграммы и её параметры:</h4>
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}

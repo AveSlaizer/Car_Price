@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <title>Car price</title>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 {% include 'header.html' %}
+
 {% if messages %}
     <div class="container w-50 mt-3">
         <div class="position-relative top-0 start-50 translate-middle-x w-50">
@@ -19,9 +20,11 @@
         </div>
     </div>
 {% endif %}
+
 <div class="container w-50 mt-3"> {% block content %}{% endblock content %}</div>
 
-<footer> {% block footer %}{% endblock footer %}</footer>
+{% include 'footer.html' %}
+
 <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
 </body>
 </html>

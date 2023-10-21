@@ -17,4 +17,4 @@ class RegisterUser(SuccessMessageMixin, CreateView):
         Возвращает тэг шаблона.
         :return: reverse_lazy
         """
-        return reverse_lazy('main')
+        return reverse_lazy('main_page')

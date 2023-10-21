@@ -4,6 +4,7 @@ from django.db.models import Model
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, ListView, DeleteView
 from django.urls import reverse_lazy
+
 from .forms import AddTransportForm, DeleteTransportForm
 from .models import Transport
 from ..finance_expenses.utils import DataMixin
@@ -82,3 +83,5 @@ class DeleteTransport(DataMixin, SuccessMessageMixin, DeleteView):
         :return: reverse_lazy
         """
         return reverse_lazy('garage')
+
+# TODO проверить названия всех классов и исправить, если требуется
