@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
 
-    'apps.mainpage',
+    'apps.main_page.apps.MainPageConfig',
     'apps.garage.apps.GarageConfig',
     'apps.finance_expenses.apps.FinanceExpensesConfig',
     'apps.accounts.apps.AccountsConfig',
