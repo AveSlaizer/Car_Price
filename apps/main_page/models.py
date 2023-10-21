@@ -7,7 +7,7 @@ class MainPageCarousel(models.Model):
         verbose_name_plural = 'Карусель главной страницы'
 
     image = models.ImageField(
-        upload_to='image/main_page/carousel/',
+        upload_to='images/main_page/carousel/',
         verbose_name='Изображение',
     )
     title = models.CharField(
