@@ -9,12 +9,14 @@
             {% csrf_token %}
             {{ form|crispy }}
 
+            <div class="text-center">
                 <button type="submit" class="btn btn-warning">Удалить</button>
                 <a href="{% url 'garage' %}">
                     <button type="button" class="btn btn-primary">
                         Отмена
                     </button>
                 </a>
+            </div>
 
         </form>
     </div>

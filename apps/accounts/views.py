@@ -4,9 +4,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 
-class RegisterUser(SuccessMessageMixin, CreateView):
+class RegisterUserView(SuccessMessageMixin, CreateView):
     """
-        Рендерит шаблон с формой регистрации нового пользователя
+    Рендерит шаблон с формой регистрации нового пользователя
     """
     form_class = UserCreationForm
     template_name = 'accounts/registration.html'

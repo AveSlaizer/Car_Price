@@ -12,7 +12,7 @@ from .models import FinanceExpense
 from .utils import DataMixin
 
 
-class AddFinanceExpenses(DataMixin, SuccessMessageMixin, CreateView):
+class AddFinanceExpensesView(DataMixin, SuccessMessageMixin, CreateView):
     """
     Рендерит шаблон с формой добавления записи о тратах
     """
@@ -29,7 +29,7 @@ class AddFinanceExpenses(DataMixin, SuccessMessageMixin, CreateView):
         Возвращает словарь с данными, которые будут отображаться в форме перед ее заполнением.
         :return: dict - словарь с данными для формы
         """
-        initial = super(AddFinanceExpenses, self).get_initial()
+        initial = super(AddFinanceExpensesView, self).get_initial()
         self.transport_obj = self.get_transport(self.request)
         initial['transport'] = self.transport_obj
         initial['odometer'] = self.transport_obj.odometer
@@ -42,7 +42,7 @@ class AddFinanceExpenses(DataMixin, SuccessMessageMixin, CreateView):
         :param kwargs: Данные
         :return: dict Сформированные данные для шаблона
         """
-        context = super(AddFinanceExpenses, self).get_context_data(**kwargs)
+        context = super(AddFinanceExpensesView, self).get_context_data(**kwargs)
         context['transport_name'] = self.transport_obj
         return context
 

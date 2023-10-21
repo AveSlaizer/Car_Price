@@ -10,7 +10,7 @@ from .models import Transport
 from ..finance_expenses.utils import DataMixin
 
 
-class AddTransport(SuccessMessageMixin, CreateView):
+class AddTransportView(SuccessMessageMixin, CreateView):
     """
     Рендерит шаблон с формой добавления записи о тратах
     """
@@ -50,7 +50,7 @@ class GarageView(ListView):
         return Transport.objects.filter(owner=self.request.user.id)
 
 
-class DeleteTransport(DataMixin, SuccessMessageMixin, DeleteView):
+class DeleteTransportView(DataMixin, SuccessMessageMixin, DeleteView):
     form_class = DeleteTransportForm
     template_name = 'garage/delete_transport.html'
     success_message = 'Транспорт удален'
@@ -73,7 +73,7 @@ class DeleteTransport(DataMixin, SuccessMessageMixin, DeleteView):
         Возвращает словарь с данными, которые будут отображаться в форме перед ее заполнением.
         :return: dict - словарь с данными для формы
         """
-        initial = super(DeleteTransport, self).get_initial()
+        initial = super(DeleteTransportView, self).get_initial()
         initial['transport'] = self.transport_obj
         return initial
 
@@ -83,5 +83,3 @@ class DeleteTransport(DataMixin, SuccessMessageMixin, DeleteView):
         :return: reverse_lazy
         """
         return reverse_lazy('garage')
-
-# TODO проверить названия всех классов и исправить, если требуется
