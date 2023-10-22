@@ -85,10 +85,20 @@
                                                             <input type="hidden" name="transport_id"
                                                                    value="{{ transport.id }}">
                                                             <button type="submit" class="dropdown-item">
-                                                                Диаграммы и графики
+                                                                Диаграммы за месяц
                                                             </button>
                                                         </form>
                                                     </li>
+                                                    <li>
+                                                        <form action="{% url 'year_graph_form' %}" method="get">
+                                                            <input type="hidden" name="transport_id"
+                                                                   value="{{ transport.id }}">
+                                                            <button type="submit" class="dropdown-item">
+                                                                Диаграммы за год
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                    <hr>
                                                     <li>
                                                         <form action="{% url 'delete_transport' %}" method="get">
                                                             <input type="hidden" name="transport_id"

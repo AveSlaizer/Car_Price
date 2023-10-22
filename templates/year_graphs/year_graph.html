@@ -1,0 +1,5 @@
+{% extends 'base_page.html' %}
+{% block content %}
+    <h3 class="container text-center">Диаграмма для {{ transport }} за {{ year }}г.</h3>
+    <div class="container text-center shadow-lg mt-3"><img src="{{ file }}" alt="year_graph"></div>
+{% endblock content %}

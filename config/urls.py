@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
 from config import settings
 from django.conf.urls.static import static
 
@@ -27,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('finance_expenses/', include('apps.finance_expenses.urls')),
     path('month_graph/', include('apps.month_graphs.urls')),
+    path('year_graph/', include('apps.year_graphs.urls')),
 ]
 
 if settings.DEBUG:

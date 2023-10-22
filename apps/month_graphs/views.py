@@ -8,7 +8,7 @@ from .utils.month_graphs_settings import MONTHS_NAMES
 from ..finance_expenses.utils import DataMixin
 
 
-class MonthGraphView(DataMixin, FormView):
+class MonthGraphFormView(DataMixin, FormView):
     """
     Рендерит шаблон с формой выбора типа диаграммы за месяц.
     """
@@ -25,7 +25,7 @@ class MonthGraphView(DataMixin, FormView):
         Возвращает словарь с исходными данными для формы.
         :return: словарь
         """
-        initial = super(MonthGraphView, self).get_initial()
+        initial = super(MonthGraphFormView, self).get_initial()
         self.transport_obj = self.get_transport(self.request)
         initial['username'] = self.request.user.username
         initial['transport'] = self.transport_obj.id

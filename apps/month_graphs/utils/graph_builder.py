@@ -8,7 +8,7 @@ from .abstractions import MonthGraph
 from .month_graphs_settings import MONTH_GRAPH_UTILITIES
 from config.settings import MEDIA_DIR
 
-
+# FIXME тут требуется рефакторинг
 class MonthGraphBuilder:
     """
     Управляет построением и сохранением диаграмм за определенный месяц
