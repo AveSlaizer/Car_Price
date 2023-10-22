@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <title>Car price</title>
+    <title>CARdiagram</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/media/images/logos/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/images/logos/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/images/logos/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/media/images/logos/favicon/site.webmanifest">
 </head>
 <body class="d-flex flex-column min-vh-100">
 {% include 'header.html' %}
@@ -13,7 +17,8 @@
     <div class="container w-50 mt-3">
         <div class="position-relative top-0 start-50 translate-middle-x w-50">
             {% for message in messages %}
-                <div{% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show" role="{{ message.tags }}"{% endif %}> {{ message }}
+                <div{% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                                          role="{{ message.tags }}"{% endif %}> {{ message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
                 </div>
             {% endfor %}
