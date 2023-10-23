@@ -40,12 +40,11 @@ class YearGraphFormView(MonthGraphFormView):
         :return: функция-генератор шаблона.
         """
         form_data = form.cleaned_data
-        print('form_data:', form_data)
         builder = YearGraphBuilder(**form_data)
         builder.build_and_save_graph()
-        # file = self.build_and_save_graph(form_data)
+        file = builder.get_relative_graph_path()
         context = {
-            # 'file': file,
+            'file': file,
             'transport': self.transport_obj,
             'year': form_data['year']
         }

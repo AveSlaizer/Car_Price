@@ -33,7 +33,7 @@ class YearGraphBuilder:
         """
         if self.__username not in os.listdir(self.GRAPHS_DIR):
             os.mkdir(self.GRAPHS_DIR / self.__username)
-        self.__user_dir = self.GRAPHS_DIR / self.__username
+        self.__user_dir = str(self.GRAPHS_DIR / self.__username)
 
     def build_and_save_graph(self):
         """
@@ -42,13 +42,14 @@ class YearGraphBuilder:
         self.__set_user_dir()
         self.__strategy.build_and_save_graph(self.__user_dir)
 
-    def get_user_dir(self) -> str:
+    def get_relative_graph_path(self) -> str:
         """
         Возвращает относительный путь к файлу с диаграммой. Используется в шаблоне.
         """
         index = str(self.__user_dir).rfind('\\media\\')
         path = str(self.__user_dir)[index:]
-        return path
+        file_name = self.get_file_name()
+        return path + '\\' + file_name
 
     def get_file_name(self) -> str:
         """
