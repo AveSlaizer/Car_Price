@@ -6,7 +6,7 @@ MONTH_GRAPH_UTILITIES = {
 }
 
 # Список кортежей для отображения в форме в шаблоне. Строится автоматически.
-MONTH_GRAPH_CHOICES = [(i, globals()[i].get_verbose_name()) for i in MONTH_GRAPH_UTILITIES.keys()]
+month_graph_choices = [(i, globals()[i].get_verbose_name()) for i in MONTH_GRAPH_UTILITIES.keys()]
 
 # Номера и названия месяцев для отображения в форме в шаблоне.
 MONTHS_NAMES = [

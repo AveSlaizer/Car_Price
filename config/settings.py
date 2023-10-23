@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'apps.finance_expenses.apps.FinanceExpensesConfig',
     'apps.accounts.apps.AccountsConfig',
     'apps.month_graphs.apps.MonthGraphsConfig',
+    'apps.year_graphs.apps.YearGraphsConfig',
 ]
 
 MIDDLEWARE = [

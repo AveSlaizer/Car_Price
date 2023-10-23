@@ -1,21 +1,21 @@
 from django import forms
 from django.utils import timezone
 
-from apps.month_graphs.utils.month_graphs_settings import month_graph_choices, MONTHS_NAMES
+from apps.year_graphs.utils.year_graphs_settings import year_graphs_choice
 
 
-class MonthGraphSelectForm(forms.Form):
+class YearGraphSelectForm(forms.Form):
     """
-    Форма выбора вида графика за месяц.
+    Форма выбора вида графика за год.
     """
     username = forms.CharField(
         widget=forms.HiddenInput,
     )
-    transport = forms.IntegerField(
+    transport_id = forms.IntegerField(
         widget=forms.HiddenInput,
     )
     graph_type = forms.CharField(
-        widget=forms.Select(choices=month_graph_choices),
+        widget=forms.Select(choices=year_graphs_choice),
         label='Тип графика',
         help_text='Выберите тип графика',
     )
@@ -23,9 +23,4 @@ class MonthGraphSelectForm(forms.Form):
         widget=forms.NumberInput(attrs={'min': 1950, 'max': timezone.now().year, 'default': timezone.now().year}),
         label='Год',
         help_text='Выберите год'
-    )
-    month_number = forms.IntegerField(
-        widget=forms.Select(choices=MONTHS_NAMES, attrs={'default': 1}),
-        label='Месяц',
-        help_text='Выберите месяц',
     )
