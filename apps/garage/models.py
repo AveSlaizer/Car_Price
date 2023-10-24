@@ -1,6 +1,6 @@
 from django.db import models
-from datetime import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
 
 
 class FuelType(models.Model):
@@ -104,8 +104,8 @@ class Transport(models.Model):
         help_text='Введите модель транспортного средства. Максимум 50 символов.'
     )
     year = models.IntegerField(
-        default=datetime.now().year,
-        validators=[MinValueValidator(1900), MaxValueValidator(datetime.now().year)],
+        default=timezone.now().year,
+        validators=[MinValueValidator(1900), MaxValueValidator(timezone.now().year)],
         verbose_name="Год выпуска",
         help_text='Введите год выпуска транспортного средства.'
     )

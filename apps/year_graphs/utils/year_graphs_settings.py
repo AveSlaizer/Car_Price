@@ -1,6 +1,6 @@
 from .year_km_price import YearGraphKmPrice
 
-# Словарь с названием и ссылкой на класс-построитель месячных диаграмм
+# Словарь с названием и ссылкой на класс-построитель годовых диаграмм
 YEAR_GRAPH_UTILITIES = {
     'YearGraphKmPrice': YearGraphKmPrice,
 }

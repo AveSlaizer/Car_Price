@@ -24,6 +24,9 @@ class YearGraphKmPrice(YearGraph, ABC):
 
     @staticmethod
     def get_verbose_name() -> str:
+        """
+        Возвращает русифицированное название. Используется для отображения в шаблоне.
+        """
         return 'Стоимость 1-го км. в течении года'
 
     def build_and_save_graph(self, path: str):

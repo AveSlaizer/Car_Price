@@ -31,7 +31,16 @@ class YearGraphFormView(MonthGraphFormView):
         return initial
 
     def build_and_save_graph(self, form_data: dict) -> str:
-        pass
+        """
+        Отправляет данные из формы в класс-строитель диаграммы и
+        возвращает относительный путь для отображения в шаблоне.
+        :param form_data: данные из формы.
+        :return: относительный путь к файлу.
+        """
+        builder = YearGraphBuilder(**form_data)
+        builder.build_and_save_graph()
+        file = builder.get_relative_graph_path()
+        return file
 
     def form_valid(self, form):
         """
@@ -40,9 +49,7 @@ class YearGraphFormView(MonthGraphFormView):
         :return: функция-генератор шаблона.
         """
         form_data = form.cleaned_data
-        builder = YearGraphBuilder(**form_data)
-        builder.build_and_save_graph()
-        file = builder.get_relative_graph_path()
+        file = self.build_and_save_graph(form_data)
         context = {
             'file': file,
             'transport': self.transport_obj,
